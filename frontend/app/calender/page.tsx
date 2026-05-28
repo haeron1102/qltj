@@ -25,6 +25,8 @@ export default function CalendarPage() {
       "events",
       JSON.stringify(events)
     );
+
+    saveEventsToFile(events);
   }, [events]);
 
   return (
@@ -57,3 +59,16 @@ export default function CalendarPage() {
     </div>
   );
 }
+
+const saveEventsToFile = async (
+  events: any[]
+) => {
+  await fetch("/api/save-events", {
+    method: "POST",
+    headers: {
+      "Content-Type":
+        "application/json",
+    },
+    body: JSON.stringify(events),
+  });
+};
